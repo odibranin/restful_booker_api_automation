@@ -1,6 +1,7 @@
-package api.utis.requestbodies;
+package com.example.restBookerApi.utis.requestbodies;
 
 import org.json.JSONObject;
+
 
 public class BookingRequest {
     private String firstname;
@@ -30,6 +31,7 @@ public class BookingRequest {
         this.depositPaid = depositPaid;
         this.bookingdates = bookingdates;
         this.additionalNeeds = additionalNeeds;
+        this.requestBody = createMainBody();
     }
 
     public static Builder builder() {
@@ -101,7 +103,7 @@ public class BookingRequest {
         }
     }
 
-    private void createMainBody() {
+    private JSONObject createMainBody() {
         JSONObject data = new JSONObject();
         data.put("firstname", this.firstname);
         data.put("lastname", this.lastname);
@@ -117,5 +119,6 @@ public class BookingRequest {
 
         data.put("additionalneeds", this.additionalNeeds);
         this.requestBody = data;
+        return data;
     }
 }

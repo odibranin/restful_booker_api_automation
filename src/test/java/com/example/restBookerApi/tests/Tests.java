@@ -1,10 +1,10 @@
-package api.tests;
+package com.example.restBookerApi.tests;
 
-import api.steps.ApiRequests;
-import api.utis.authentication.AuthenticationRequest;
-import api.utis.requestbodies.BookingDates;
-import api.utis.requestbodies.BookingRequest;
-import api.utis.validation.ResponseValidation;
+import com.example.restBookerApi.steps.ApiRequests;
+import com.example.restBookerApi.utis.authentication.AuthenticationRequest;
+import com.example.restBookerApi.utis.requestbodies.BookingDates;
+import com.example.restBookerApi.utis.requestbodies.BookingRequest;
+import com.example.restBookerApi.utis.validation.ResponseValidation;
 import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
 import org.testng.annotations.BeforeClass;
@@ -19,15 +19,20 @@ public class Tests {
     private String bookingId;
     private ResponseValidation validation;
 
+    @BeforeClass
+    public void setUp() {
+        validation = new ResponseValidation();
+    }
+
     @Parameters({"validUsername", "validPassword"})
-    @BeforeClass(groups = "positive")
+    @Test(groups = "positive")
     public void generateAuthTokenValidCredentials(String validUsername, String validPassword) {
         AuthenticationRequest request = new AuthenticationRequest(validUsername, validPassword);
         response = ApiRequests.getAuthenticationToken(request);
         String authToken = response.jsonPath().getString("token");
-        validation = new ResponseValidation();
         validation.validateResponseHeaders(response);
         validation.validateResponseStatusCode(response, 200);
+        validation.validateResponseBodySchema(response, "createToken");
     }
 
     @Parameters({
@@ -61,39 +66,26 @@ public class Tests {
         response = ApiRequests.createBooking(request);
         JsonPath jsonPath = response.jsonPath();
         this.bookingId = jsonPath.getString("bookingid");
-
-        LOGGER.info(" BOOKING ID: " + bookingId);
-
-        validation = new ResponseValidation();
         validation.validateResponseHeaders(response);
         validation.validateResponseStatusCode(response, 200);
+        validation.validateResponseBodySchema(response, "createBooking");
     }
 
     @Test(priority = 2, groups = "positive")
     public void getBookingById() {
         response = ApiRequests.getBookingById(this.bookingId);
-
-        // Log the response body to the console
-        String responseBody = response.getBody().asString();
-        LOGGER.info("RESPONSE BODY FOR BOOKING BY ID: " + responseBody);
-
-        validation = new ResponseValidation();
         validation.validateResponseHeaders(response);
         validation.validateResponseStatusCode(response, 200);
+        validation.validateResponseBodySchema(response, "getBookingById");
     }
 
     @Parameters({"createBookingFirstName", "createBookingLastName"})
     @Test(priority = 3, groups = "positive")
     public void getBooking(String createBookingFirstName, String createBookingLastName) {
         response = ApiRequests.getBooking(createBookingFirstName, createBookingLastName);
-
-
-        String responseBody = response.getBody().asString();
-        LOGGER.info("BOOKINGS THAT SHARE PROVIDED FIRSTNAME AND LASTNAME: " + responseBody);
-
-        validation = new ResponseValidation();
         validation.validateResponseHeaders(response);
         validation.validateResponseStatusCode(response, 200);
+        validation.validateResponseBodySchema(response, "getBooking");
     }
 
     @Parameters({
@@ -126,9 +118,9 @@ public class Tests {
                 .build();
 
         response = ApiRequests.updateBooking(this.bookingId, request);
-        validation = new ResponseValidation();
         validation.validateResponseHeaders(response);
         validation.validateResponseStatusCode(response, 200);
+        validation.validateResponseBodySchema(response, "updateBooking");
     }
 
     @Parameters({
@@ -144,15 +136,15 @@ public class Tests {
                 .build();
 
         response = ApiRequests.partialUpdateBooking(this.bookingId, request);
-        validation = new ResponseValidation();
+        String responseBody = response.getBody().asString();
         validation.validateResponseHeaders(response);
         validation.validateResponseStatusCode(response, 200);
+        validation.validateResponseBodySchema(response, "partialUpdateBooking");
     }
 
     @Test(priority = 6, dependsOnMethods = "createBooking", groups = "positive")
     public void deleteBooking() {
         response = ApiRequests.deleteBooking(this.bookingId);
-        validation = new ResponseValidation();
         validation.validateResponseHeaders(response);
         validation.validateResponseStatusCode(response, 201);
     }
@@ -173,7 +165,6 @@ public class Tests {
     public void generateAuthTokenInvalidPassword(String validUsername, String invalidPassword) {
         AuthenticationRequest request = new AuthenticationRequest(validUsername, invalidPassword);
         response = ApiRequests.getAuthenticationToken(request);
-
         validation.validateResponseHeaders(response);
         validation.validateResponseStatusCode(response, 400);
         validation.validateResponseErrorMessage(response);

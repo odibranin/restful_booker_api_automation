@@ -1,4 +1,4 @@
-package api.utis.authentication;
+package com.example.restBookerApi.utis.authentication;
 
 import org.json.JSONObject;
 
