@@ -1,8 +1,8 @@
-package api.utis.requestbodies;
+package com.example.restBookerApi.utis.requestbodies;
 
 public class BookingDates {
-    private Object checkin;
-    private Object checkout;
+    private String checkin;
+    private String checkout;
 
     public BookingDates(String checkin, String checkout) {
         this.checkin = checkin;
