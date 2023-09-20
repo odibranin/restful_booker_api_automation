@@ -41,7 +41,7 @@ public class ResponseValidation {
                 .isEqualTo(ERROR_MESSAGE);
     }
 
-    public void validateDResponseDatePropertyFormat(final Response response, String date) {
+    public void validateResponseDatePropertyFormat(final Response response, String date) {
         Assertions.assertThat(response.jsonPath().getString(date))
                 .as(AssertionMessages.INVALID_DATE_FORMAT)
                 .isEqualTo(DATE_PROPERTY_FORMAT);
@@ -68,7 +68,7 @@ public class ResponseValidation {
     private String getResponseSchemaFileName(String responseType) {
         String schemaFileName = schemaFileNames.get(responseType);
         if (schemaFileName == null) {
-            throw new IllegalArgumentException(AssertionMessages.UNKNOWN_RESPONSE_TYPE);
+            throw new NullPointerException(AssertionMessages.UNKNOWN_RESPONSE_TYPE);
         }
         return schemaFileName;
     }

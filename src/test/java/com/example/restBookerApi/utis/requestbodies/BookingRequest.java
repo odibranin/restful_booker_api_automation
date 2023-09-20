@@ -1,119 +1,113 @@
 package com.example.restBookerApi.utis.requestbodies;
-
 import org.json.JSONObject;
 
-
 public class BookingRequest {
-    private String firstname;
-    private String lastname;
-    private int intFirstname;
-    private int intLastname;
-    private int totalPrice;
-    private boolean depositPaid;
-    private BookingDates bookingdates;
-    private String additionalNeeds;
+    private final String firstName;
+    private final String lastName;
+    private final int intFirstName;
+    private final int intLastName;
+    private final int totalPrice;
+    private final boolean depositPaid;
+    private final BookingDates bookingDates;
+    private final String additionalNeeds;
     public JSONObject requestBody;
 
     public BookingRequest(String firstname,
-                          String lastname,
-                          int intFirstname,
-                          int intLastname,
+                          String lastName,
+                          int intFirstName,
+                          int intLastName,
                           int totalPrice,
                           boolean depositPaid,
-                          BookingDates bookingdates,
+                          BookingDates bookingDates,
                           String additionalNeeds
-                        ) {
-        this.firstname = firstname;
-        this.lastname = lastname;
-        this.intFirstname = intFirstname;
-        this.intLastname = intLastname;
+    ) {
+        this.firstName = firstname;
+        this.lastName = lastName;
+        this.intFirstName = intFirstName;
+        this.intLastName = intLastName;
         this.totalPrice = totalPrice;
         this.depositPaid = depositPaid;
-        this.bookingdates = bookingdates;
+        this.bookingDates = bookingDates;
         this.additionalNeeds = additionalNeeds;
         this.requestBody = createMainBody();
     }
 
-    public static Builder builder() {
-        return new Builder();
-    }
-
-    public static class Builder  {
-        private String firstname;
-        private String lastname;
+    public static class Builder {
+        private String firstName;
+        private String lastName;
         private int intFirstName;
         private int intLastName;
         private int totalPrice;
         private boolean depositPaid;
-        private BookingDates bookingdates;
+        private BookingDates bookingDates;
         private String additionalNeeds;
 
-    public Builder setFirstname(String firstname) {
-        this.firstname = firstname;
-        return this;
-    }
-
-    public Builder setLastname(String lastname) {
-        this.lastname = lastname;
-        return this;
-    }
-
-    public Builder setFirstname(int firstname) {
-        this.intFirstName = firstname;
-        return this;
-    }
-
-    public Builder setLastname(int lastname) {
-        this.intLastName = lastname;
-        return this;
+        public Builder setFirstName(String firstName) {
+            this.firstName = firstName;
+            return this;
         }
 
-        public Builder setTotalprice(int totalPrice) {
-        this.totalPrice = totalPrice;
-        return this;
-    }
+        public Builder setLastName(String lastName) {
+            this.lastName = lastName;
+            return this;
+        }
 
-    public Builder setDepositpaid(boolean depositPaid) {
-        this.depositPaid = depositPaid;
-        return this;
-    }
+        public Builder setFirstname(int firstname) {
+            this.intFirstName = firstname;
+            return this;
+        }
 
-    public Builder setBookingdates(BookingDates bookingdates) {
-        this.bookingdates = bookingdates;
-        return this;
-    }
+        public Builder setLastname(int lastname) {
+            this.intLastName = lastname;
+            return this;
+        }
 
-    public Builder setAdditionalNeeds(String additionalNeeds) {
-        this.additionalNeeds = additionalNeeds;
-        return this;
-    }
+        public Builder setTotalPrice(int totalPrice) {
+            this.totalPrice = totalPrice;
+            return this;
+        }
 
-    public BookingRequest build() {
-       BookingRequest bookingRequest = new BookingRequest(
-                firstname,
-                lastname,
-                intFirstName,
-                intLastName,
-                totalPrice,
-                depositPaid,
-                bookingdates,
-                additionalNeeds);
-        bookingRequest.createMainBody();
-        return bookingRequest;
+        public Builder setDepositPaid(boolean depositPaid) {
+            this.depositPaid = depositPaid;
+            return this;
+        }
+
+        public Builder setBookingDates(BookingDates bookingdates) {
+            this.bookingDates = bookingdates;
+            return this;
+        }
+
+        public Builder setAdditionalNeeds(String additionalNeeds) {
+            this.additionalNeeds = additionalNeeds;
+            return this;
+        }
+
+        public BookingRequest build() {
+            BookingRequest bookingRequest = new BookingRequest(
+                    firstName,
+                    lastName,
+                    intFirstName,
+                    intLastName,
+                    totalPrice,
+                    depositPaid,
+                    bookingDates,
+                    additionalNeeds);
+            bookingRequest.createMainBody();
+            return bookingRequest;
         }
     }
 
     private JSONObject createMainBody() {
         JSONObject data = new JSONObject();
-        data.put("firstname", this.firstname);
-        data.put("lastname", this.lastname);
+        data.put("firstname", this.firstName);
+        data.put("lastname", this.lastName);
         data.put("totalprice", this.totalPrice);
         data.put("depositpaid", this.depositPaid);
 
-        if (this.bookingdates != null) {
+        if (this.bookingDates != null) {
             JSONObject bookingDatesObject = new JSONObject();
-            bookingDatesObject.put("checkin", this.bookingdates.getCheckin());
-            bookingDatesObject.put("checkout", this.bookingdates.getCheckout());
+            bookingDatesObject.put("checkin", this.bookingDates.getCheckIn());
+            bookingDatesObject.put("checkout", this.bookingDates.getCheckOut());
             data.put("bookingdates", bookingDatesObject);
         }
 

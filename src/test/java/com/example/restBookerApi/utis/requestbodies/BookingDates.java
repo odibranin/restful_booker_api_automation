@@ -1,19 +1,19 @@
 package com.example.restBookerApi.utis.requestbodies;
 
 public class BookingDates {
-    private String checkin;
-    private String checkout;
+    private String checkIn;
+    private String checkOut;
 
-    public BookingDates(String checkin, String checkout) {
-        this.checkin = checkin;
-        this.checkout = checkout;
+    public BookingDates(String checkIn, String checkOut) {
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
     }
 
-    public Object getCheckin() {
-        return checkin;
+    public String getCheckIn() {
+        return checkIn;
     }
 
-    public Object getCheckout() {
-        return checkout;
+    public String getCheckOut() {
+        return checkOut;
     }
 }

@@ -55,11 +55,11 @@ public class Tests {
     ) {
         BookingDates bookingDates = new BookingDates(createBookingCheckIn, createBookingCheckOut);
         BookingRequest request = new BookingRequest.Builder()
-                .setFirstname(createBookingFirstName)
-                .setLastname(createBookingLastName)
-                .setTotalprice(createBookingTotalPrice)
-                .setDepositpaid(createBookingBookingPaid)
-                .setBookingdates(bookingDates)
+                .setFirstName(createBookingFirstName)
+                .setLastName(createBookingLastName)
+                .setTotalPrice(createBookingTotalPrice)
+                .setDepositPaid(createBookingBookingPaid)
+                .setBookingDates(bookingDates)
                 .setAdditionalNeeds(createBookingAdditionalNeeds)
                 .build();
 
@@ -109,11 +109,11 @@ public class Tests {
 
         BookingDates bookingDates = new BookingDates(updateBookingCheckIn, updateBookingCheckOut);
         BookingRequest request = new BookingRequest.Builder()
-                .setFirstname(updateBookingFirstName)
-                .setLastname(updateBookingLastName)
-                .setTotalprice(updateBookingTotalPrice)
-                .setDepositpaid(updateBookingBookingPaid)
-                .setBookingdates(bookingDates)
+                .setFirstName(updateBookingFirstName)
+                .setLastName(updateBookingLastName)
+                .setTotalPrice(updateBookingTotalPrice)
+                .setDepositPaid(updateBookingBookingPaid)
+                .setBookingDates(bookingDates)
                 .setAdditionalNeeds(updateBookingAdditionalNeeds)
                 .build();
 
@@ -131,8 +131,8 @@ public class Tests {
     public void partialUpdateBooking(String partialUpdateBookingFirstName, String partialUpdateBookingLastName
     ) {
         BookingRequest request = new BookingRequest.Builder()
-                .setFirstname(partialUpdateBookingFirstName)
-                .setLastname(partialUpdateBookingLastName)
+                .setFirstName(partialUpdateBookingFirstName)
+                .setLastName(partialUpdateBookingLastName)
                 .build();
 
         response = ApiRequests.partialUpdateBooking(this.bookingId, request);
@@ -218,10 +218,10 @@ public class Tests {
 
         BookingDates bookingDates = new BookingDates(createBookingCheckIn, createBookingCheckOut);
         BookingRequest request = new BookingRequest.Builder()
-                .setFirstname(createBookingFirstName)
-                .setTotalprice(createBookingTotalPrice)
-                .setDepositpaid(createBookingBookingPaid)
-                .setBookingdates(bookingDates)
+                .setFirstName(createBookingFirstName)
+                .setTotalPrice(createBookingTotalPrice)
+                .setDepositPaid(createBookingBookingPaid)
+                .setBookingDates(bookingDates)
                 .setAdditionalNeeds(createBookingAdditionalNeeds)
                 .build();
 
@@ -251,9 +251,9 @@ public class Tests {
         BookingRequest request = new BookingRequest.Builder()
                 .setFirstname(invalidUsernameIntDataType)
                 .setLastname(invalidPasswordIntDataType)
-                .setTotalprice(createBookingTotalPrice)
-                .setDepositpaid(createBookingBookingPaid)
-                .setBookingdates(bookingDates)
+                .setTotalPrice(createBookingTotalPrice)
+                .setDepositPaid(createBookingBookingPaid)
+                .setBookingDates(bookingDates)
                 .setAdditionalNeeds(createBookingAdditionalNeeds)
                 .build();
 
@@ -281,18 +281,18 @@ public class Tests {
     ) {
         BookingDates bookingDates = new BookingDates(createBookingCheckIn, createBookingCheckOut);
         BookingRequest request = new BookingRequest.Builder()
-                .setFirstname(createBookingFirstName)
-                .setLastname(createBookingLastName)
-                .setTotalprice(createBookingTotalPrice)
-                .setDepositpaid(createBookingBookingPaid)
-                .setBookingdates(bookingDates)
+                .setFirstName(createBookingFirstName)
+                .setLastName(createBookingLastName)
+                .setTotalPrice(createBookingTotalPrice)
+                .setDepositPaid(createBookingBookingPaid)
+                .setBookingDates(bookingDates)
                 .setAdditionalNeeds(createBookingAdditionalNeeds)
                 .build();
 
         response = ApiRequests.createBooking(request);
         validation.validateResponseStatusCode(response, 400);
-        validation.validateDResponseDatePropertyFormat(response, "checkin");
-        validation.validateDResponseDatePropertyFormat(response, "checkout");
+        validation.validateResponseDatePropertyFormat(response, "checkin");
+        validation.validateResponseDatePropertyFormat(response, "checkout");
     }
 
     // Edge cases for getting bookings ID
@@ -335,11 +335,11 @@ public class Tests {
 
         BookingDates bookingDates = new BookingDates(updateBookingCheckIn, updateBookingCheckOut);
         BookingRequest request = new BookingRequest.Builder()
-                .setFirstname(updateBookingFirstName)
-                .setLastname(updateBookingLastName)
-                .setTotalprice(updateBookingTotalPrice)
-                .setDepositpaid(updateBookingBookingPaid)
-                .setBookingdates(bookingDates)
+                .setFirstName(updateBookingFirstName)
+                .setLastName(updateBookingLastName)
+                .setTotalPrice(updateBookingTotalPrice)
+                .setDepositPaid(updateBookingBookingPaid)
+                .setBookingDates(bookingDates)
                 .setAdditionalNeeds(updateBookingAdditionalNeeds)
                 .build();
 
@@ -368,11 +368,11 @@ public class Tests {
 
         BookingDates bookingDates = new BookingDates(updateBookingCheckIn, updateBookingCheckOut);
         BookingRequest request = new BookingRequest.Builder()
-                .setFirstname(updateBookingFirstName)
-                .setLastname(updateBookingLastName)
-                .setTotalprice(updateBookingTotalPrice)
-                .setDepositpaid(updateBookingBookingPaid)
-                .setBookingdates(bookingDates)
+                .setFirstName(updateBookingFirstName)
+                .setLastName(updateBookingLastName)
+                .setTotalPrice(updateBookingTotalPrice)
+                .setDepositPaid(updateBookingBookingPaid)
+                .setBookingDates(bookingDates)
                 .setAdditionalNeeds(updateBookingAdditionalNeeds)
                 .build();
 
@@ -390,8 +390,8 @@ public class Tests {
                                                   String partialUpdateBookingLastName
     ) {
         BookingRequest request = new BookingRequest.Builder()
-                .setFirstname(partialUpdateBookingFirstName)
-                .setLastname(partialUpdateBookingLastName)
+                .setFirstName(partialUpdateBookingFirstName)
+                .setLastName(partialUpdateBookingLastName)
                 .build();
 
         response = ApiRequests.partialUpdateBooking("", request);
@@ -407,8 +407,8 @@ public class Tests {
                                            String partialUpdateBookingLastName
     ) {
         BookingRequest request = new BookingRequest.Builder()
-                .setFirstname(partialUpdateBookingFirstName)
-                .setLastname(partialUpdateBookingLastName)
+                .setFirstName(partialUpdateBookingFirstName)
+                .setLastName(partialUpdateBookingLastName)
                 .build();
 
         response = ApiRequests.partialUpdateBookingNoAuth("", request);
