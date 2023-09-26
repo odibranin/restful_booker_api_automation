@@ -275,11 +275,11 @@ public class Tests {
                                                       String createBookingLastName,
                                                       int createBookingTotalPrice,
                                                       boolean createBookingBookingPaid,
-                                                      String createBookingCheckIn,
-                                                      String createBookingCheckOut,
+                                                      String createBookingCheckInInvalidFormat,
+                                                      String createBookingCheckOutInvalidFormat,
                                                       String createBookingAdditionalNeeds
     ) {
-        BookingDates bookingDates = new BookingDates(createBookingCheckIn, createBookingCheckOut);
+        BookingDates bookingDates = new BookingDates(createBookingCheckInInvalidFormat, createBookingCheckOutInvalidFormat);
         BookingRequest request = new BookingRequest.Builder()
                 .setFirstName(createBookingFirstName)
                 .setLastName(createBookingLastName)

@@ -12,7 +12,7 @@ public class BookingRequest {
     private final String additionalNeeds;
     public JSONObject requestBody;
 
-    public BookingRequest(String firstname,
+    private BookingRequest(String firstname,
                           String lastName,
                           int intFirstName,
                           int intLastName,

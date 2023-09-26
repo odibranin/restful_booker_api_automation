@@ -9,31 +9,34 @@ import io.restassured.specification.RequestSpecification;
 import static io.restassured.RestAssured.given;
 
 public abstract class ApiConfig {
-    public static Response sendRequest(String method, String path, Object body) {
+    public static Response sendRequest(String method, String path, Object body, boolean auth) {
         return given()
-                .spec(requestSpec(body))
+                .spec(requestSpec(body, auth))
                 .when()
                 .request(method, path);
     }
 
-    public static Response sendRequest(String method, String path, String bookingId, Object body) {
+    public static Response sendRequest(String method, String path, String bookingId, Object body, boolean auth) {
         return given()
-                .spec(requestSpec(body))
+                .spec(requestSpec(body, auth))
                 .when()
                 .request(method, path + bookingId);
     }
 
-    private static RequestSpecification requestSpec(Object body) {
-        RequestSpecification requestSpec = new RequestSpecBuilder()
+    private static RequestSpecification requestSpec(Object body, boolean auth) {
+        RequestSpecBuilder requestSpecBuilder = new RequestSpecBuilder()
                 .setBaseUri(ApiConstants.BASE_URL)
-                .setAuth(setBasicAuthScheme())
-                .addHeader("Content-Type", ContentType.JSON.toString())
-                .build();
+                .addHeader("Content-Type", ContentType.JSON.toString());
 
         if (body != null) {
-            requestSpec = requestSpec.body(body);
+            requestSpecBuilder.setBody(body);
         }
-        return requestSpec;
+
+        if (auth) {
+            requestSpecBuilder.setAuth(setBasicAuthScheme());
+        }
+
+        return requestSpecBuilder.build();
     }
 
     private static BasicAuthScheme setBasicAuthScheme() {
